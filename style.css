@@ -1,0 +1,80 @@
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url("images/backgrounds/galaxy.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+header {
+  background-color: rgba(0,0,0,0.7);
+  border-bottom: 1px solid #333;
+  padding: 1rem 2rem;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+nav h1 {
+  font-size: 1.5rem;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+}
+nav a {
+  text-decoration: none;
+  color: #ddd;
+  font-weight: 500;
+}
+nav a:hover {
+  color: #fff;
+}
+main {
+  padding: 3rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+h2, h3 {
+  text-align: center;
+}
+p {
+  text-align: center;
+  color: #eee;
+}
+.cta-button {
+  background-color: #fff;
+  color: #000;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 1rem;
+}
+.cta-button:hover {
+  background-color: #eaeaea;
+}
+footer {
+  background-color: rgba(0,0,0,0.7);
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid #333;
+  font-size: 0.9rem;
+}
+footer a {
+  color: #ccc;
+  text-decoration: underline;
+}
