@@ -1,63 +1,82 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Support &amp; Donate</title>
-<link href="Donate.css" rel="stylesheet"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support & Donate</title>
+  <link rel="stylesheet" href="Donate.css" />
 </head>
 <body>
-<main>
-<h1>Support My Work</h1><p>
-<p class="intro-paragraph">
-        I'm creating non-commercial projects involving AI art, storytelling, and open tools.<br/>
-        You can support my work securely and anonymously via those methodes.
-</p>
-<div class="section">
-<h2>💛 Support via Liberapay</h2>
-<p><a href="https://liberapay.com/Archangel_Ai/" target="_blank">liberapay.com/Archangel_Ai</a></p>
-</div>
-<div class="section">
-<h2>🪙 Donate with Crypto</h2>
-<div class="qr-row">
-<div>
-<p><strong>USDC (Ethereum):</strong></p>
-<div class="wallet">0x9C5eB6F9143095537bf3f5Fca3EAc40a44305F4b</div>
-<img alt="USDC QR" class="qr" src="../Images/QRs/usdc_qr.jpg"/>
-</div>
-<div>
-<p><strong>USDT (Ethereum):</strong></p>
-<div class="wallet">0x9C5eB6F9143095537bf3f5Fca3EAc40a44305F4b</div>
-<img alt="USDT QR" class="qr" src="../Images/QRs/usdt_qr.jpg"/>
-</div>
-</div>
-<div class="qr-row">
-<div>
-<p><strong>ETH (Ethereum):</strong></p>
-<div class="wallet">0x9C5eB6F9143095537bf3f5Fca3EAc40a44305F4b</div>
-<img alt="ETH QR" class="qr" src="../Images/QRs/eth_qr.jpg"/>
-</div>
-<div>
-<p><strong>BTC (Bitcoin):</strong></p>
-<div class="wallet">bc1q7l0qnn2dlwzhm9nfwrq8dcgtse74ajat092uyk</div>
-<img alt="BTC QR" class="qr" src="../Images/QRs/btc_qr.jpg"/>
-</div>
-</div>
-</div>
-<div class="section">
-<h2>💙 Donate via PayPal (Direct)</h2>
-<p>
+  <main>
+    <h1 id="animated-title"></h1>
+    <p class="intro-paragraph">
+      I'm creating non-commercial projects involving AI art, storytelling, and open tools.<br/>
+      You can support my work securely and anonymously via the methods below.
+    </p>
+
+    <div class="section">
+      <h2>💛 Support via Liberapay</h2>
+      <p><a href="https://liberapay.com/Archangel_Ai/" target="_blank">liberapay.com/Archangel_Ai</a></p>
+    </div>
+
+    <div class="section">
+      <h2>🪙 Donate with Crypto</h2>
+      <div class="qr-row">
+        <div>
+          <p><strong>USDC (Ethereum):</strong></p>
+          <div class="wallet">0x9C5eB6F9143095537bf3f5Fca3EAc40a44305F4b</div>
+          <img alt="USDC QR" class="qr" src="../Images/QRs/usdc_qr.jpg" />
+        </div>
+        <div>
+          <p><strong>USDT (Ethereum):</strong></p>
+          <div class="wallet">0x9C5eB6F9143095537bf3f5Fca3EAc40a44305F4b</div>
+          <img alt="USDT QR" class="qr" src="../Images/QRs/usdt_qr.jpg" />
+        </div>
+      </div>
+      <div class="qr-row">
+        <div>
+          <p><strong>ETH (Ethereum):</strong></p>
+          <div class="wallet">0x9C5eB6F9143095537bf3f5Fca3EAc40a44305F4b</div>
+          <img alt="ETH QR" class="qr" src="../Images/QRs/eth_qr.jpg" />
+        </div>
+        <div>
+          <p><strong>BTC (Bitcoin):</strong></p>
+          <div class="wallet">bc1q7l0qnn2dlwzhm9nfwrq8dcgtse74ajat092uyk</div>
+          <img alt="BTC QR" class="qr" src="../Images/QRs/btc_qr.jpg" />
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>💙 Donate via PayPal (Direct)</h2>
+      <p>
         If Stripe or Liberapay doesn't work for you, you can also support me directly via PayPal:
       </p>
-<p><a href="https://www.paypal.com/donate/?hosted_button_id=6PTXG8QXUL5KE" target="_blank">paypal.com/donate</a></p>
-<img alt="PayPal QR" class="qr" src="../Images/QRs/paypal_qr.jpg"/>
-</div>
-<p>Thank you for your support!</p>
-<div style="text-align: center; margin-top: 3rem;">
-  <a href="../index.html" class="back-button">← Return to Homepage</a>
-</div>
-</main>
+      <p><a href="https://www.paypal.com/donate/?hosted_button_id=6PTXG8QXUL5KE" target="_blank">paypal.com/donate</a></p>
+      <img alt="PayPal QR" class="qr" src="../Images/QRs/paypal_qr.jpg" />
+    </div>
+
+    <p style="text-align:center;">Thank you for your support!</p>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="../index.html" class="back-button">← Return to Homepage</a>
+    </div>
+  </main>
+
+  <script>
+    const text = "Support My Work";
+    const target = document.getElementById("animated-title");
+    let index = 0;
+
+    function typeEffect() {
+      if (index <= text.length) {
+        target.innerHTML = text.substring(0, index) + '<span class="cursor">|</span>';
+        index++;
+        setTimeout(typeEffect, 100);
+      }
+    }
+
+    window.onload = typeEffect;
+  </script>
 </body>
 </html>
