@@ -1,29 +1,53 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Archangel_Ai</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Archangel AI</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="page-wrapper">
-    <header>
-      <nav>
-      <h1>Archangel_Ai</h1>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="art.html">Art</a></li>
-        <li><a href="models.html">Models</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="Sites/Donate.html">Donate</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="overlay"></div>
 
-    <footer>
-    <p>&copy; 2025 Archangel_Ai — All rights reserved.</p>
+  <div class="layout-container">
+    <nav class="moveable" style="top: 20px; right: 30px;">
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="loras.html">LoRa's</a>
+        <a href="projects.html">Other Projects</a>
+        <a href="Sites/Donate.html">Donation</a>
+      </div>
+    </nav>
+
+    <section class="hero moveable" style="top: 300px; left: 1100px;">
+      <h1 class="title" id="animated-title"></h1>
+      <p class="subtitle">Art, Stories & Worlds beyond Reality</p>
+      <p class="solarity-link">
+        <a href="https://thesolarityproject.art" target="_blank">&gt; Launch Solarity_Project()</a>
+      </p>
+    </section>
+
+    <footer class="moveable" style="bottom: 0px; left: 1100px;">
+      &copy; 2025 Archangel-AI.art — All rights reserved.
     </footer>
   </div>
+
+  <script>
+    const text = "Archangel_Ai";
+    const target = document.getElementById("animated-title");
+    let index = 0;
+
+    function typeEffect() {
+      if (index <= text.length) {
+        target.innerHTML = text.substring(0, index) + '<span class="cursor">|</span>';
+        index++;
+        setTimeout(typeEffect, 100);
+      }
+    }
+
+    window.onload = typeEffect;
+  </script>
 </body>
 </html>
