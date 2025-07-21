@@ -1,4 +1,3 @@
-
 /* GLOBAL */
 html, body {
   height: 100%;
@@ -41,6 +40,10 @@ html, body {
   text-align: center;
 }
 
+.solarity-link {
+  text-align: center;
+}
+  
 .title {
   font-size: 3rem;
   margin-bottom: 1rem;
