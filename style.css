@@ -1,79 +1,100 @@
+/* Reset und Basiseinstellungen */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
   background-image: url("Images/Backgrounds/Galaxy.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+/* Wrapper für komplette Seite */
+.page-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
 header {
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   border-bottom: 1px solid #333;
-  padding: 1rem 2rem;
+  padding: 3rem 2rem;
 }
+
 nav {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
 }
+
 nav h1 {
   font-size: 1.5rem;
 }
+
 nav ul {
   list-style: none;
   display: flex;
   gap: 1.5rem;
-  padding: 0;
-  margin: 0;
 }
+
 nav a {
   text-decoration: none;
   color: #ddd;
   font-weight: 500;
 }
+
 nav a:hover {
   color: #fff;
 }
+
+/* Hauptbereich */
 main {
-  padding: 3rem 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
 }
-h2, h3 {
-  text-align: center;
-}
-p {
-  text-align: center;
-  color: #eee;
-}
+
+/* Call-to-Action Button */
 .cta-button {
   background-color: #fff;
   color: #000;
   padding: 0.75rem 1.5rem;
-  border: none;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
-  display: inline-block;
-  margin-top: 1rem;
+  transition: background 0.3s;
 }
+
 .cta-button:hover {
   background-color: #eaeaea;
 }
+
+/* Footer */
 footer {
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
+  border-top: 1px solid #333;
   text-align: center;
   padding: 1rem;
-  border-top: 1px solid #333;
   font-size: 0.9rem;
+  margin-top: auto;
 }
+
 footer a {
   color: #ccc;
   text-decoration: underline;
