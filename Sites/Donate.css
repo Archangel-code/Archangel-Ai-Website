@@ -13,14 +13,18 @@ main {
   padding: 2rem;
   background: rgba(20, 20, 20, 0.8);
   border-radius: 16px;
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+  box-shadow: 0 0 20px rgba(47, 0, 255, 0.2);
 }
 
 h1 {
-  color: #ffcc00;
+  color: #0026ff;
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2.2rem;
+}
+
+.intro-paragraph {
+  margin-bottom: 2rem;
 }
 
 .section {
@@ -32,7 +36,7 @@ h1 {
 }
 
 .section h2 {
-  color: #ffd700;
+  color: #f0f0f0;
   margin-top: 0;
 }
 
@@ -64,7 +68,7 @@ h1 {
 }
 
 a {
-  color: #ffd700;
+  color: #f0f0f0;
   text-decoration: none;
 }
 
