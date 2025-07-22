@@ -30,7 +30,6 @@ html, body {
 
 .moveable {
   position: absolute;
-  cursor: move;
 }
 
 /* Zentrierungs-Helfer */
