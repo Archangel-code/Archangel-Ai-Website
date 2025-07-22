@@ -47,20 +47,20 @@
     </footer>
   </div>
 
-  <script>
-    const text = "Archangel_Ai";
-    const target = document.getElementById("animated-title");
-    let index = 0;
+<script>
+  const text = "Archangel_Ai";
+  const target = document.getElementById("animated-title");
+  let index = 0;
 
-    function typeEffect() {
-      if (index <= text.length) {
-        target.innerHTML = text.substring(0, index) + '<span class="cursor">|</span>';
-        index++;
-        setTimeout(typeEffect, 100);
-      }
+  function typeEffect() {
+    if (index <= text.length) {
+      target.innerHTML = text.substring(0, index) + '<span class="cursor">|</span>';
+      index++;
+      setTimeout(typeEffect, 100);
     }
+  }
 
-    window.onload = typeEffect;
-  </script>
+  window.onload = typeEffect;
+</script>
 </body>
 </html>
