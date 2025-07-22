@@ -1,15 +1,14 @@
-
 /* GLOBAL */
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100vh;
   font-family: 'Inter', sans-serif;
   color: #ffffff;
-  position: relative;
   background: url("Images/Backgrounds/Galaxy_Starshower.jpg") no-repeat center center fixed;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
 }
 
 .overlay {
@@ -22,30 +21,23 @@ html, body {
 }
 
 .layout-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  gap: 4rem;
 }
 
-.moveable {
-  position: absolute;
-}
-
-/* Zentrierungs-Helfer */
-.center-x {
-  left: 50%;
-  transform: translateX(-50%);
-}
-.center-xy {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .nav-links a {
   color: #f5f5f5;
-  margin-left: 1.5rem;
   text-decoration: none;
 }
 
@@ -66,11 +58,11 @@ html, body {
 }
 
 .solarity-link {
-  margin-top: 2rem;
-  font-family: monospace;
-  color: #00bcd4;
-  font-size: 1.1rem;
   text-align: center;
+  font-family: monospace;
+  color: #ffffff;
+  font-size: 1.1rem;
+  max-width: 600px;
 }
 
 .solarity-link a {
@@ -88,21 +80,28 @@ html, body {
 }
 
 @keyframes blink {
-  from, to { opacity: 0; }
-  50% { opacity: 1; }
+  from, to { opacity: 0 }
+  50% { opacity: 1 }
+}
+
+/* ==================== UNIVERSAL SHIFT ==================== */
+.shift {
+  transform: translateY(var(--shift-y, 0px));
 }
 
 /* ==================== SOCIAL MEDIA ==================== */
 .social-links {
+  margin-bottom: 0px;  
   display: flex;
   gap: 2rem;
   z-index: 99;
+  justify-content: center;
 }
 
 .social-links a img {
   height: 32px;
   width: auto;
-  max-width: 48px;     /* Begrenzung gegen Überdimensionierung */
+  max-width: 48px;
   max-height: 48px;
   transition: opacity 0.3s ease;
 }
@@ -113,8 +112,15 @@ html, body {
 
 /* ==================== FOOTER ==================== */
 footer {
+  margin-top: 650px;
   text-align: center;
   font-size: 0.85rem;
   color: #888;
   padding: 2rem;
+}
+
+/* ==================== NO SCROLLING ==================== */
+
+html, body {
+  overflow: hidden;
 }
