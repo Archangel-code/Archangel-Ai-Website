@@ -85,13 +85,21 @@ html, body {
 }
 
 /* ==================== UNIVERSAL SHIFT ==================== */
-.shift {
+
+.shift-y {
   transform: translateY(var(--shift-y, 0px));
 }
 
+.shift-x {
+  transform: translateX(var(--shift-x, 0px));
+}
+
+.shift-xy {
+  transform: translate(var(--shift-x, 0px), var(--shift-y, 0px));
+}
+
 /* ==================== SOCIAL MEDIA ==================== */
-.social-links {
-  margin-bottom: 0px;  
+.social-links { 
   display: flex;
   gap: 2rem;
   z-index: 99;
@@ -112,7 +120,6 @@ html, body {
 
 /* ==================== FOOTER ==================== */
 footer {
-  margin-top: 650px;
   text-align: center;
   font-size: 0.85rem;
   color: #888;
@@ -124,3 +131,4 @@ footer {
 html, body {
   overflow: hidden;
 }
+
