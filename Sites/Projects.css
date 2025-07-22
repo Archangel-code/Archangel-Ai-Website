@@ -1,0 +1,173 @@
+body {
+  background: url("../Images/Backgrounds/Galaxy_Starshower.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: auto;
+}
+
+.moveable {
+  position: absolute;
+}
+
+.center-x {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.center-xy {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.size-variable {
+  width: var(--size, 85vw);
+  max-width: 100%;
+}
+
+.container-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: max-content;
+}
+
+.container {
+  width: 100%;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+.placeholder-text {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  display: inline-block;
+  text-decoration: none;
+  width: auto;
+  max-height: 650px;
+  aspect-ratio: 9 / 16;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(2px);
+  transition: transform 0.3s ease;
+}
+
+.placeholder-text:hover {
+  transform: scale(1.03);
+}
+
+.placeholder-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 2rem;
+}
+
+.placeholder-text:hover .placeholder-overlay {
+  opacity: 1;
+}
+
+.placeholder-overlay p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #fff;
+  font-style: italic;
+  text-align: center;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.project-card {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  transition: transform 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  max-width: 100%;
+}
+
+.project-card:hover {
+  transform: scale(1.03);
+}
+
+.project-card img {
+  max-height: 650px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 2rem;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-overlay p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #fff;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  position: absolute;
+  bottom: 40px;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  z-index: 10;
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
