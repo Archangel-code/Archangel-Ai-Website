@@ -103,6 +103,8 @@ html, body {
 .social-links a img {
   height: 32px;
   width: auto;
+  max-width: 48px;     /* Begrenzung gegen Überdimensionierung */
+  max-height: 48px;
   transition: opacity 0.3s ease;
 }
 
