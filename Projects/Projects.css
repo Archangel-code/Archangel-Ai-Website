@@ -1,0 +1,164 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  color: #f5f5f5;
+  background: url("../Image Folder/Backgrounds/Galaxy_Starshower.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.container-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  font-family: monospace;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.project-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+.project-card,
+.placeholder-text {
+  position: relative;
+  width: 360px;
+  height: 640px;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+.project-card img,
+.placeholder-text img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  display: block;
+}
+
+.project-overlay,
+.placeholder-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  padding: 2rem;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 24px;
+}
+
+.project-card:hover .project-overlay,
+.placeholder-text:hover .placeholder-overlay {
+  opacity: 1;
+}
+
+.project-overlay p,
+.placeholder-overlay p {
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.project-overlay strong {
+  font-size: 1.3rem;
+  color: #00bcd4;
+}
+
+.back-button-wrapper {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.back-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff;
+  color: #0e0e0e;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(157, 164, 165, 0.4);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.back-button:hover {
+  background-color: #ffffff;
+  color: #000;
+}
+
+.footer {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin: 2rem auto 1rem auto;
+  opacity: 0.6;
+}
+
+.center-x {
+  display: flex;
+  justify-content: center;
+}
+
+.center-xy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shift-y {
+  transform: translateY(var(--shift-y, 0px));
+}
+
+.shift-x {
+  transform: translateX(var(--shift-x, 0px));
+}
+
+.shift-xy {
+  transform: translate(var(--shift-x, 0px), var(--shift-y, 0px));
+}
+
+.size-variable {
+  width: 100%;
+  max-width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
