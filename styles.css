@@ -119,11 +119,13 @@ html, body {
 }
 
 /* ==================== FOOTER ==================== */
-footer {
+
+.footer {
   text-align: center;
-  font-size: 0.85rem;
-  color: #888;
-  padding: 2rem;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin: 2rem auto 1rem auto;
+  opacity: 0.6;
 }
 
 /* ==================== NO SCROLLING ==================== */
@@ -131,4 +133,3 @@ footer {
 html, body {
   overflow: hidden;
 }
-
