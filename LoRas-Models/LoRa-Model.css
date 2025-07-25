@@ -1,0 +1,221 @@
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0b0b13 url("../Image Folder/Backgrounds/Galaxy_Starshower.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+.layout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.lora-card {
+  background: rgba(10, 10, 20, 0.75);
+  backdrop-filter: blur(6px);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(153, 102, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lora-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.lora-card h3 {
+  color: #ffcc00;
+}
+.lora-card p {
+  font-size: 0.95rem;
+}
+.lora-card .buttons a {
+  display: inline-block;
+  background: #222;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  margin: 0.3rem 0.4rem 0 0;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+.filter-menu {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+.filter-menu button {
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 0.6rem 1.2rem;
+  margin: 0.3rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+.filter-menu .active {
+  background-color: #6600ff;
+  border-color: #6600ff;
+}
+.pagination {
+  text-align: center;
+  margin: 4rem 0 6rem;
+}
+.pagination button {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  margin: 0.3rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.pagination button.active,
+.pagination button:hover {
+  background-color: #6600ff;
+}
+
+.back-button-wrapper {
+  margin-top: 3rem;
+}
+
+
+.back-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff;
+  color: #0e0e0e;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(157, 164, 165, 0.4);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.back-button:hover {
+  background-color: #ffffff;
+  color: #000;
+}
+
+.center-x {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.center-xy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.-shift-y {
+  transform: translateY(var(--shift-y, 0px));
+}
+
+.-shift-x {
+  transform: translateX(var(--shift-x, 0px));
+}
+
+.-shift-xy {
+  transform: translate(var(--shift-x, 0px), var(--shift-y, 0px));
+}
+
+.shift-y {
+  transform: translateY(var(--shift-y, 0px));
+}
+
+.shift-x {
+  transform: translateX(var(--shift-x, 0px));
+}
+
+.shift-xy {
+  transform: translate(var(--shift-x, 0px), var(--shift-y, 0px));
+}
+
+.lora-card.placeholder {
+  visibility: hidden;
+}
+
+/* Layoutstruktur: voller Seitenhöhe */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.layout-wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-container {
+  flex: 1;
+}
+
+/* Footer immer unten */
+.footer {
+  margin-top: auto;
+  padding-bottom: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.85rem;
+}
+
+/* Icons */
+.icon-links a {
+  margin: 0 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.icon-links img {
+  width: 48px;
+  height: 48px;
+  transition: transform 0.3s ease;
+}
+
+.icon-links img:hover {
+  transform: scale(1.1);
+}
+
+.icon-tooltip .tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 10px;
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.icon-tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
