@@ -87,6 +87,7 @@ function setupPagination() {
   const pageCount = Math.ceil(filtered.length / perPage);
 
   showPage(1);
+  updateSingleCardClass();
 
   if (pageCount <= 1) return;
 
@@ -100,12 +101,25 @@ function setupPagination() {
 
     btn.addEventListener("click", () => {
       showPage(i);
+      updateSingleCardClass();
     });
 
     pagination.appendChild(btn);
   }
 
   document.getElementById("pagination-slot").appendChild(pagination);
+}
+
+// === Observe Changes to Cards and Update Single Card Class ===
+function updateSingleCardClass() {
+  const visibleCards = document.querySelectorAll(".lora-card:not([style*='display: none'])");
+  const container = document.querySelector(".gallery-container");
+
+  if (visibleCards.length === 1) {
+    container.classList.add("single-card");
+  } else {
+    container.classList.remove("single-card");
+  }
 }
 
 // === Setup Filter Buttons ===
