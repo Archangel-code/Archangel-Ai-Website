@@ -1,5 +1,5 @@
 body {
-  background: url("../Image Folder/Backgrounds/Galaxy_Starshower.jpg") no-repeat center center fixed;  
+  background: url("/Background/Galaxy_Starshower.jpg") no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
   overflow-y: auto;
