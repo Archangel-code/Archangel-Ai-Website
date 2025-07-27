@@ -3,7 +3,7 @@ body {
   background-size: cover;
   min-height: 100vh;
   overflow-y: auto;
-  color: #ffffff;
+
   font-family: sans-serif;
   text-align: center;
   margin: 0;
@@ -13,6 +13,7 @@ body {
 .title {
   font-size: 2.5rem;
   margin-bottom: 20px;
+  color: #ffffff;
 }
 
 .controls {
@@ -85,7 +86,7 @@ body {
 /* Pagination Buttons */
 .pagination button {
   background: #222;
-  color: #fff;
+  color: #ffffff;
   border: none;
   padding: 0.6rem 1.2rem;
   margin: 0.3rem;
@@ -102,6 +103,18 @@ body {
 .pagination button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  color: #ffffff;
+}
+
+.pagination,
+.pagination button,
+#pageIndicator,
+.page-number {
+  color: #ffffff;
+}
+
+.subtitle {
+  color: #ffffff;
 }
 
 /* Back Buttons */
