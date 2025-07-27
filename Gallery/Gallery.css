@@ -1,12 +1,8 @@
-
 body {
-  background: url("../Image Folder/Backgrounds/Galaxy_Starshower.jpg") no-repeat center center fixed;
+  background: url("/Background/Galaxy_Starshower.jpg") no-repeat center center fixed;
   background-size: cover;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  min-height: 100vh;
+  overflow-y: auto;
   color: #ffffff;
   font-family: sans-serif;
   text-align: center;
@@ -18,43 +14,98 @@ body {
   font-size: 2.5rem;
   margin-bottom: 20px;
 }
+
 .controls {
   margin-bottom: 20px;
 }
-#tagFilter, #searchInput {
-  padding: 8px 12px;
-  margin: 0 5px;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
-  padding: 10px;
-}
-.gallery-item img {
-  max-width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-.gallery-item p {
-  margin-top: 8px;
-  font-size: 0.9rem;
-}
-.pagination {
-  margin-top: 20px;
-}
-.pagination button {
-  padding: 6px 12px;
-  margin: 0 5px;
-  background-color: #222;
-  color: white;
-  border: none;
-  cursor: pointer;
+
+#imageOverlay {
+  cursor: zoom-out;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  visibility: hidden;
 }
 
-/* Button */
+/* Searchbar */
+#tagFilter, #searchInput {
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 0.6rem 1.2rem;
+  margin: 0.3rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 350px;  /* Increased from 300px to add space for text */
+  gap: 40px;  /* Increased from 20px for more spacing */
+  padding: 20px;  /* Increased padding */
+  max-width: 1200px;
+  margin: 0 auto;
+  grid-auto-flow: row;
+}
+
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;  /* Space between image and text */
+}
+
+.gallery-item img {
+  width: 100%;
+  height: calc(100% - 24px);  /* Reduced height to make room for text */
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.02);
+}
+
+.gallery-item p {
+  margin: 0;  /* Remove default margin */
+  font-size: 1rem;  /* Increased font size */
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);  /* Add text shadow for better readability */
+}
+
+/* Pagination Buttons */
+.pagination button {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  margin: 0.3rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.pagination button:hover,
+.pagination button.active {
+  background-color: #6600ff;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Back Buttons */
 .back-button {
-  display: inline-block;
   padding: 0.75rem 1.5rem;
   background-color: #ffffff;
   color: #0e0e0e;
@@ -71,15 +122,9 @@ body {
 }
 
 .back-button-wrapper {
-  max-width: 960px;
-  margin: 1rem auto 2rem auto;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
-}
-
-.back-button:hover {
-  background-color: #ffffff;
-  color: #000;
 }
 
 /* Footer */
@@ -87,12 +132,11 @@ body {
   text-align: center;
   color: #aaa;
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+  margin: 2rem 0;
   opacity: 0.6;
 }
 
-/* Universal Shift */
-
+/* Position */
 .-shift-y {
   transform: translateY(var(--shift-y, 0px));
 }

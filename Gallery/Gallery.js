@@ -1,8 +1,7 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   let data = [];
   let currentPage = 1;
-  const itemsPerPage = 16;
+  const itemsPerPage = 9;
   let activeTag = 'all';
   let searchQuery = '';
 
@@ -12,6 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const pageIndicator = document.getElementById('pageIndicator');
   const prevPage = document.getElementById('prevPage');
   const nextPage = document.getElementById('nextPage');
+
+  const overlay = document.createElement('div');
+  overlay.id = 'imageOverlay';
+  const overlayImg = document.createElement('img');
+  overlayImg.style.maxWidth = '90vw';
+  overlayImg.style.maxHeight = '90vh';
+  overlay.appendChild(overlayImg);
+  document.body.appendChild(overlay);
+
+  overlay.addEventListener('click', () => {
+    overlay.style.visibility = 'hidden';
+  });
 
   fetch('gallery.json')
     .then(res => res.json())
@@ -46,6 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <img src="${item.src}" alt="${item.name}">
         <p>${item.name}</p>
       `;
+      div.querySelector('img').addEventListener('click', () => {
+        overlayImg.src = item.src;
+        overlay.style.visibility = 'visible';
+      });
       gallery.appendChild(div);
     });
 
