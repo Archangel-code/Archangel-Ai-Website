@@ -106,11 +106,7 @@ body {
   background-color: #6600ff;
 }
 
-.back-button-wrapper {
-  margin-top: 3rem;
-}
-
-
+/* Back Buttons */
 .back-button {
   padding: 0.75rem 1.5rem;
   background-color: #ffffff;
@@ -127,18 +123,22 @@ body {
   color: #000;
 }
 
-.center-x {
+.back-button-wrapper {
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
+}
+
+/* Footer */
+.footer {
   text-align: center;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin: 2rem 0;
+  opacity: 0.6;
 }
 
-.center-xy {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+/* Position */
 .-shift-y {
   transform: translateY(var(--shift-y, 0px));
 }
@@ -167,7 +167,19 @@ body {
   visibility: hidden;
 }
 
-/* Layoutstruktur: voller Seitenhöhe */
+.center-x {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.center-xy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Layoutstruktur */
 html, body {
   height: 100%;
   margin: 0;
@@ -181,15 +193,6 @@ html, body {
 
 .layout-container {
   flex: 1;
-}
-
-/* Footer immer unten */
-.footer {
-  margin-top: auto;
-  padding-bottom: 2rem;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 0.85rem;
 }
 
 /* Icons */
