@@ -1,136 +1,179 @@
 
-// ==============================
-// unified.js – LoRA Gallery Logic with Sort
-// ==============================
-
 // === Settings ===
 const perPage = 6;
 let currentFilter = "all";
 let currentPage = 1;
-let currentSort = "alphabetical"; // or "newest"
+let currentSort = "alphabetical";
 
-// === DOM References ===
-const cards = Array.from(document.querySelectorAll(".lora-card"));
-const filterButtons = document.querySelectorAll(".filter-menu button");
-const sortButtons = document.querySelectorAll(".sort-menu .sort-btn");
-const galleryContainer = document.querySelector(".gallery-container");
-
-// === Setup Sort Buttons ===
-sortButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    sortButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    currentSort = btn.dataset.sort;
-    setupPagination();
-  });
+// === Initialize on DOM Load ===
+document.addEventListener('DOMContentLoaded', function() {
+    setupCardEvents();
+    setupFilterButtons();
+    setupSortButtons();
+    filterAndDisplayCards();
+    
+    // Set initial scroll position
+    document.documentElement.style.setProperty('--window-scroll-y', window.scrollY + 'px');
+    
+    // Track scroll position for modal centering
+    window.addEventListener('scroll', function() {
+        document.documentElement.style.setProperty('--window-scroll-y', window.scrollY + 'px');
+    });
 });
 
-// === Utility: Get Filtered and Sorted Cards ===
-function getFilteredCards() {
-  let filtered = cards.filter(card => {
-    const categoryAttr = card.getAttribute("data-category") || "";
-    const categories = categoryAttr.trim().split(/\s+/);
-    return currentFilter === "all" || categories.includes(currentFilter);
-  });
-
-  if (currentSort === "alphabetical") {
-    filtered.sort((a, b) => {
-      const nameA = (a.querySelector("h3")?.textContent.split("(")[0] || "").trim().toLowerCase();
-      const nameB = (b.querySelector("h3")?.textContent.split("(")[0] || "").trim().toLowerCase();
-      return nameA.localeCompare(nameB);
+// === Card Events ===
+function setupCardEvents() {
+    // Handle card clicks
+    document.querySelectorAll('.lora-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' || e.target.closest('.buttons')) return;
+            
+            const expand = this.nextElementSibling;
+            if (expand && expand.classList.contains('card-expand')) {
+                // Close all other modals
+                document.querySelectorAll('.card-expand').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // Update scroll position for modal centering
+                document.documentElement.style.setProperty('--window-scroll-y', window.scrollY + 'px');
+                
+                // Show modal (blur is now part of the modal)
+                expand.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
     });
-  } else if (currentSort === "newest") {
-    filtered.sort((a, b) => {
-      const timeA = new Date(a.dataset.timestamp || 0);
-      const timeB = new Date(b.dataset.timestamp || 0);
-      return timeB - timeA;
-    });
-  }
 
-  return filtered;
+    // Handle close button and background clicks
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('close-btn') || e.target.classList.contains('card-expand')) {
+            const expandedCard = e.target.closest('.card-expand');
+            if (expandedCard) {
+                expandedCard.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            e.stopPropagation();
+        }
+    });
+
+    // Handle ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const expandedCard = document.querySelector('.card-expand.active');
+            if (expandedCard) {
+                expandedCard.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+    });
 }
 
-// === Show a Page of Filtered Cards (and reorder DOM!) ===
-function showPage(page) {
-  const filtered = getFilteredCards();
-  const start = (page - 1) * perPage;
-  const end = page * perPage;
+// === Filter Buttons ===
+function setupFilterButtons() {
+    const filterButtons = document.querySelectorAll('.filter-menu button');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            currentFilter = button.dataset.filter;
+            currentPage = 1;
+            filterAndDisplayCards();
+        });
+    });
+}
 
-  // Entferne alle Karten aus dem Container
-  cards.forEach(card => {
-    card.style.display = "none";
-    if (card.parentNode === galleryContainer) {
-      galleryContainer.removeChild(card);
+// === Sort Buttons ===
+function setupSortButtons() {
+    const sortButtons = document.querySelectorAll('.sort-menu .sort-btn');
+    sortButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            sortButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            currentSort = button.dataset.sort;
+            filterAndDisplayCards();
+        });
+    });
+}
+
+// === Filtering and Sorting ===
+function filterAndDisplayCards() {
+    const cards = Array.from(document.querySelectorAll('.lora-card'));
+    const filteredCards = cards.filter(card => {
+        return currentFilter === 'all' || card.dataset.category === currentFilter;
+    });
+
+    // Sort cards
+    filteredCards.sort((a, b) => {
+        if (currentSort === 'alphabetical') {
+            const titleA = a.querySelector('h3').textContent.trim().toLowerCase();
+            const titleB = b.querySelector('h3').textContent.trim().toLowerCase();
+            return titleA.localeCompare(titleB);
+        } else if (currentSort === 'newest') {
+            const dateA = new Date(a.dataset.timestamp);
+            const dateB = new Date(b.dataset.timestamp);
+            return dateB - dateA;
+        }
+        return 0;
+    });
+
+    // Display cards and update pagination
+    displayCards(filteredCards);
+    updatePagination(filteredCards.length);
+}
+
+// === Display Cards ===
+function displayCards(cards) {
+    const startIdx = (currentPage - 1) * perPage;
+    const endIdx = startIdx + perPage;
+    
+    // Hide all cards and their expanded views
+    document.querySelectorAll('.lora-card, .card-expand').forEach(el => {
+        el.style.display = 'none';
+    });
+
+    // Show current page's cards and their modals
+    cards.slice(startIdx, endIdx).forEach(card => {
+        card.style.display = '';
+        
+        // Find the corresponding card-expand more reliably
+        let expand = card.nextElementSibling;
+        
+        // Skip any text nodes or other elements until we find card-expand
+        while (expand && (!expand.classList || !expand.classList.contains('card-expand'))) {
+            expand = expand.nextElementSibling;
+        }
+        
+        if (expand && expand.classList.contains('card-expand')) {
+            expand.style.display = '';
+        }
+    });
+
+    // Update single card class
+    const container = document.querySelector('.gallery-container');
+    container.classList.toggle('single-card', cards.length === 1);
+}
+
+// === Pagination ===
+function updatePagination(totalCards) {
+    const paginationSlot = document.getElementById('pagination-slot');
+    const pageCount = Math.ceil(totalCards / perPage);
+
+    let html = '<div class="pagination">';
+    for (let i = 1; i <= pageCount; i++) {
+        html += `<button class="${i === currentPage ? 'active' : ''}">${i}</button>`;
     }
-  });
+    html += '</div>';
 
-  // Zeige und füge sortierte Karten in richtiger Reihenfolge ein
-  filtered.slice(start, end).forEach(card => {
-    card.style.display = "block";
-    galleryContainer.appendChild(card);
-  });
+    paginationSlot.innerHTML = html;
 
-  const buttons = document.querySelectorAll(".pagination button");
-  buttons.forEach((btn, i) => {
-    btn.classList.toggle("active", i + 1 === page);
-  });
-
-  currentPage = page;
-}
-
-// === Setup Pagination ===
-function setupPagination() {
-  const oldPagination = document.querySelector(".pagination");
-  if (oldPagination) oldPagination.remove();
-
-  const filtered = getFilteredCards();
-  const pageCount = Math.ceil(filtered.length / perPage);
-
-  showPage(1);
-  updateSingleCardClass();
-
-  if (pageCount <= 1) return;
-
-  const pagination = document.createElement("div");
-  pagination.className = "pagination";
-
-  for (let i = 1; i <= pageCount; i++) {
-    const btn = document.createElement("button");
-    btn.textContent = i;
-    if (i === currentPage) btn.classList.add("active");
-
-    btn.addEventListener("click", () => {
-      showPage(i);
-      updateSingleCardClass();
+    // Add click handlers to pagination buttons
+    document.querySelectorAll('.pagination button').forEach((btn, idx) => {
+        btn.addEventListener('click', () => {
+            currentPage = idx + 1;
+            filterAndDisplayCards();
+        });
     });
-
-    pagination.appendChild(btn);
-  }
-
-  document.getElementById("pagination-slot").appendChild(pagination);
 }
 
-// === Observe Changes to Cards and Update Single Card Class ===
-function updateSingleCardClass() {
-  const visibleCards = document.querySelectorAll(".lora-card:not([style*='display: none'])");
-  const container = document.querySelector(".gallery-container");
-
-  if (visibleCards.length === 1) {
-    container.classList.add("single-card");
-  } else {
-    container.classList.remove("single-card");
-  }
-}
-
-// === Setup Filter Buttons ===
-filterButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    filterButtons.forEach(btn => btn.classList.remove("active"));
-    button.classList.add("active");
-    currentFilter = button.dataset.filter;
-    setupPagination();
-  });
-});
-
-// === Initial Load ===
-setupPagination();
+// === End of Script ===

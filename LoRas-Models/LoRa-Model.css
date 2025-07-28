@@ -1,30 +1,48 @@
 
-body {
+html, body {
+  height: 100%;
   margin: 0;
+}
+
+body {
   font-family: 'Inter', sans-serif;
   background: #0b0b13 url("../Image Folder/Backgrounds/Galaxy_Starshower.jpg") no-repeat center center fixed;
   background-size: cover;
   color: white;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 .overlay {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: -1;
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 0;
 }
 .layout-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .gallery-container {
-  display: grid;
+  display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   justify-items: center;
+  justify-self: center;
+  margin: 0 auto;
+  padding: 0 2rem 4rem 2rem;
+  max-width: 1200px;
 }
 
 .gallery-container.single-card .lora-card {
@@ -39,12 +57,8 @@ body {
   border-radius: 12px;
   box-shadow: 0 0 18px rgba(153, 102, 255, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.lora-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  width: 100%;
+  max-width: 300px;
 }
 
 .lora-card img {
@@ -52,12 +66,177 @@ body {
   border-radius: 10px;
   margin-bottom: 1rem;
 }
+
+.card-expand {
+  position: fixed;
+  top: -1000px;
+  left: -1000px;
+  right: -1000px;
+  bottom: -1000px;
+  z-index: 999999;
+  display: none;
+  background-color: rgba(10, 10, 20, 0.85);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+}
+
+.card-expand.active {
+  display: block;
+}
+
+/* Hide navigation elements when modal is active */
+.card-expand.active ~ .filter-menu,
+.card-expand.active ~ .sort-menu,
+.card-expand.active ~ .pagination,
+.card-expand.active ~ .back-button-wrapper {
+  display: none !important;
+}
+
+body.modal-open .filter-menu,
+body.modal-open .sort-menu,
+body.modal-open .pagination,
+body.modal-open .back-button-wrapper {
+  display: none !important;
+}
+
+/* Hide navigation when ANY modal is active */
+body:has(.card-expand.active) .filter-menu,
+body:has(.card-expand.active) .sort-menu,
+body:has(.card-expand.active) .pagination,
+body:has(.card-expand.active) .back-button-wrapper,
+body:has(.card-expand.active) .footer {
+  display: none !important;
+}
+
+.card-expand.expand {
+  display: block;
+}
+
+/* Modal content wrapper - applies to ALL modal wrappers */
+.modal-wrapper {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 2rem !important;
+  z-index: 999 !important;
+}
+
+.expand-content {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  max-width: 1200px;
+  width: 90%;
+  background: rgba(10, 10, 20, 0.95);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 0 30px rgba(153, 102, 255, 0.3);
+  position: absolute !important;
+  top: calc(var(--window-scroll-y, 0px) + 90vh) !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 1000;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.expand-img {
+  max-width: 500px;
+  max-height: 600px;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.expand-details {
+  flex: 1;
+  padding: 1rem;
+}
+
+.expand-details h2 {
+  margin-top: 0;
+  color: #9966ff;
+}
+
+.info-text {
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: rgba(153, 102, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 2;
+}
+
+.close-btn:hover {
+    background: rgba(153, 102, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.info-text p {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(153, 102, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    padding: 1rem;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.expand-details .buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.expand-details .buttons img {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.2s ease;
+}
+
+.expand-details .buttons a:hover img {
+    transform: scale(1.1);
+}
+
+.expand-details .icon-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
 .lora-card h3 {
   color: #ffcc00;
 }
 .lora-card p {
   font-size: 0.95rem;
 }
+
 .lora-card .buttons a {
   display: inline-block;
   background: #222;
@@ -72,6 +251,8 @@ body {
 .filter-menu {
   text-align: center;
   margin: 1.5rem 0;
+  position: relative;
+  z-index: 1;
 }
 .filter-menu button {
   background: #111;
@@ -90,6 +271,8 @@ body {
 .pagination {
   text-align: center;
   margin: 4rem 0 6rem;
+  position: relative;
+  z-index: 1;
 }
 .pagination button {
   background: #222;
@@ -127,6 +310,8 @@ body {
   margin-top: 2rem;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* Footer */
@@ -180,11 +365,6 @@ body {
 }
 
 /* Layoutstruktur */
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
 .layout-wrapper {
   min-height: 100%;
   display: flex;
@@ -239,6 +419,8 @@ html, body {
 .sort-menu {
   margin-top: 1rem;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 .sort-menu .sort-btn {
   background: #111;
