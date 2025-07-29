@@ -222,20 +222,110 @@ function updatePagination(totalCards) {
     const paginationSlot = document.getElementById('pagination-slot');
     const pageCount = Math.ceil(totalCards / perPage);
 
-    let html = '<div class="pagination">';
-    for (let i = 1; i <= pageCount; i++) {
-        html += `<button class="${i === currentPage ? 'active' : ''}">${i}</button>`;
+    if (pageCount <= 1) {
+        paginationSlot.innerHTML = '';
+        return;
     }
-    html += '</div>';
 
+    let html = '<div class="pagination">';
+
+    // Previous button
+    if (currentPage > 1) {
+        html += `<button class="nav-btn" data-page="${currentPage - 1}">‹</button>`;
+    }
+
+    // Calculate which pages to show
+    let startPage, endPage;
+    
+    if (pageCount <= 3) {
+        // Show all pages if 3 or fewer
+        startPage = 1;
+        endPage = pageCount;
+    } else {
+        // Show 3 pages around current page
+        if (currentPage <= 2) {
+            startPage = 1;
+            endPage = 3;
+        } else if (currentPage >= pageCount - 1) {
+            startPage = pageCount - 2;
+            endPage = pageCount;
+        } else {
+            startPage = currentPage - 1;
+            endPage = currentPage + 1;
+        }
+    }
+
+    // First page and ellipsis if needed
+    if (startPage > 1) {
+        html += `<button data-page="1">1</button>`;
+        if (startPage > 2) {
+            html += `<span class="ellipsis">...</span>`;
+        }
+    }
+
+    // Main page numbers
+    for (let i = startPage; i <= endPage; i++) {
+        html += `<button class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+
+    // Last page and ellipsis if needed
+    if (endPage < pageCount) {
+        if (endPage < pageCount - 1) {
+            html += `<span class="ellipsis">...</span>`;
+        }
+        html += `<button data-page="${pageCount}">${pageCount}</button>`;
+    }
+
+    // Next button
+    if (currentPage < pageCount) {
+        html += `<button class="nav-btn" data-page="${currentPage + 1}">›</button>`;
+    }
+
+    // Page jump input
+    html += `<div class="page-jump">
+        <span>Go to:</span>
+        <input type="number" id="page-jump-input" min="1" max="${pageCount}" placeholder="Page">
+        <button id="page-jump-btn">Go</button>
+    </div>`;
+
+    html += '</div>';
     paginationSlot.innerHTML = html;
 
     // Add click handlers to pagination buttons
-    document.querySelectorAll('.pagination button').forEach((btn, idx) => {
+    document.querySelectorAll('.pagination button[data-page]').forEach(btn => {
         btn.addEventListener('click', () => {
-            currentPage = idx + 1;
-            filterAndDisplayCards();
+            const page = parseInt(btn.dataset.page);
+            if (page >= 1 && page <= pageCount) {
+                currentPage = page;
+                filterAndDisplayCards();
+            }
         });
+    });
+
+    // Add page jump functionality
+    const jumpInput = document.getElementById('page-jump-input');
+    const jumpBtn = document.getElementById('page-jump-btn');
+    
+    const handlePageJump = () => {
+        const page = parseInt(jumpInput.value);
+        if (page >= 1 && page <= pageCount) {
+            currentPage = page;
+            filterAndDisplayCards();
+            jumpInput.value = '';
+        } else {
+            jumpInput.value = '';
+            jumpInput.placeholder = 'Invalid page';
+            setTimeout(() => {
+                jumpInput.placeholder = 'Page';
+            }, 2000);
+        }
+    };
+
+    jumpBtn.addEventListener('click', handlePageJump);
+    jumpInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handlePageJump();
+        }
     });
 }
 
