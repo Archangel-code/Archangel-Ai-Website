@@ -31,7 +31,7 @@ body.modal-open {
 .layout-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .gallery-container {
@@ -41,7 +41,7 @@ body.modal-open {
   justify-items: center;
   justify-self: center;
   margin: 0 auto;
-  padding: 0 2rem 4rem 2rem;
+  padding: 0 2rem 2rem 2rem;
   max-width: 1200px;
 }
 
@@ -250,7 +250,7 @@ body:has(.card-expand.active) .footer {
 
 .filter-menu {
   text-align: center;
-  margin: 1.5rem 0;
+  margin: 0;
   position: relative;
   z-index: 1;
 }
@@ -376,6 +376,10 @@ body:has(.card-expand.active) .footer {
 }
 
 /* Icons */
+.icon-links {
+  margin: 0;
+}
+
 .icon-links a {
   margin: 0 10px;
   position: relative;
@@ -417,8 +421,8 @@ body:has(.card-expand.active) .footer {
 }
 
 .sort-menu {
-  margin-top: 1rem;
   text-align: center;
+  margin: 0;
   position: relative;
   z-index: 1;
 }
