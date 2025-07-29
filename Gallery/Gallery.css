@@ -1,73 +1,113 @@
-body {
-  background: url("/Image Folder/Backgrounds/Galaxy_Starshower.jpg") no-repeat center center fixed;
-  background-size: cover;
-  min-height: 100vh;
-  overflow-y: auto;
-  font-family: sans-serif;
-  text-align: center;
+/* === Gallery Styles === */
+* {
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0a0a14;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 2rem;
 }
 
 .title {
+  text-align: center;
   font-size: 2.5rem;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
   color: #ffffff;
+  background: linear-gradient(45deg, #6600ff, #9933ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
+/* === Controls === */
 .controls {
-  margin-bottom: 20px;
-}
-
-#imageOverlay {
-  cursor: zoom-out;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.85);
   display: flex;
-  align-items: center;
+  gap: 1rem;
   justify-content: center;
-  z-index: 9999;
-  visibility: hidden;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
-/* Searchbar */
-#tagFilter, #searchInput {
-  background: #111;
-  color: #fff;
-  border: 1px solid #333;
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
   padding: 0.6rem 1.2rem;
-  margin: 0.3rem;
-  cursor: pointer;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
   font-size: 1rem;
-  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
+.filter-btn:hover,
+.filter-btn.active {
+  background-color: #6600ff;
+}
+
+#searchInput {
+  padding: 0.5rem 1rem;
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 300px;
+  max-width: 100%;
+}
+
+#searchInput:focus {
+  outline: none;
+  border-color: #6600ff;
+  box-shadow: 0 0 0 2px rgba(102, 0, 255, 0.3);
+}
+
+#searchInput::placeholder {
+  color: #888;
+}
+
+/* === Gallery Grid === */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 350px;  /* Increased from 300px to add space for text */
-  gap: 40px;  /* Increased from 20px for more spacing */
-  padding: 20px;  /* Increased padding */
+  gap: 2rem;
+  margin-bottom: 3rem;
   max-width: 1200px;
-  margin: 0 auto;
-  grid-auto-flow: row;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
 }
 
 .gallery-item {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;  /* Space between image and text */
+  background: rgba(34, 34, 34, 0.8);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(102, 0, 255, 0.3);
 }
 
 .gallery-item img {
   width: 100%;
-  height: calc(100% - 24px);  /* Reduced height to make room for text */
+  height: 250px;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  display: block;
+  cursor: pointer;
   transition: transform 0.2s ease;
 }
 
@@ -75,52 +115,136 @@ body {
   transform: scale(1.02);
 }
 
-.gallery-item p {
-  margin: 0;  /* Remove default margin */
-  font-size: 1rem;  /* Increased font size */
-  color: #ffffff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);  /* Add text shadow for better readability */
+.item-info {
+  padding: 1rem;
 }
 
-/* Pagination Buttons */
+.item-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.tag {
+  background: rgba(102, 0, 255, 0.2);
+  color: #bb88ff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  border: 1px solid rgba(102, 0, 255, 0.3);
+}
+
+/* === Advanced Pagination === */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+  color: #ffffff;
+}
+
 .pagination button {
   background: #222;
   color: #ffffff;
   border: none;
   padding: 0.6rem 1.2rem;
-  margin: 0.3rem;
   font-size: 1rem;
   cursor: pointer;
   border-radius: 6px;
+  transition: background-color 0.2s ease;
+  min-width: 40px;
 }
 
-.pagination button:hover,
-.pagination button.active {
+.pagination button.active,
+.pagination button:hover:not(:disabled) {
   background-color: #6600ff;
 }
 
 .pagination button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  color: #ffffff;
+  background: #333;
 }
 
-.pagination,
-.pagination button,
-#pageIndicator,
-.page-number {
-  color: #ffffff;
+.pagination button.nav-btn {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.6rem 1rem;
 }
 
-.subtitle {
-  color: #ffffff;
+.pagination .ellipsis {
+  color: #888;
+  padding: 0.6rem 0.5rem;
+  font-size: 1rem;
 }
 
-/* Back Buttons */
+.pagination .page-jump {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+  padding: 0.5rem;
+  background: rgba(34, 34, 34, 0.5);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.pagination .page-jump span {
+  color: #ccc;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.pagination .page-jump input {
+  width: 60px;
+  padding: 0.4rem 0.6rem;
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.pagination .page-jump input:focus {
+  outline: none;
+  border-color: #6600ff;
+  box-shadow: 0 0 0 2px rgba(102, 0, 255, 0.3);
+}
+
+.pagination .page-jump button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  background: #6600ff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pagination .page-jump button:hover {
+  background: #7700ff;
+}
+
+/* === Footer and Back Button === */
+.back-button-wrapper {
+  text-align: center;
+  margin: 2rem 0 1rem;
+}
+
 .back-button {
   padding: 0.75rem 1.5rem;
-  background-color: #ffffff;
-  color: #0e0e0e;
+  background-color: #222;
+  color: #ffffff;
   border-radius: 8px;
   font-weight: bold;
   text-decoration: none;
@@ -129,46 +253,160 @@ body {
 }
 
 .back-button:hover {
-  background-color: #ffffff;
-  color: #000;
+  background-color: #6600ff;
+  color: #ffffff;
 }
 
-.back-button-wrapper {
+.footer {
+  text-align: center;
   margin-top: 2rem;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  #searchInput {
+    width: 100%;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .pagination {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .pagination .page-jump {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pagination button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* === Utility Classes === */
+.shift-xy {
+  position: relative;
+  transform: translate(var(--shift-x, 0), var(--shift-y, 0));
+}
+
+/* === Loading States === */
+.loading {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: #888;
+  font-size: 1.1rem;
+}
+
+.no-results {
+  text-align: center;
+  color: #888;
+  font-size: 1.1rem;
+  margin: 2rem 0;
+}
+
+/* === Fullview Modal === */
+.fullview-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(5px);
+}
+
+.fullview-content {
+  position: relative;
+  margin: auto;
+  padding: 20px;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
-/* Footer */
-.footer {
+.fullview-close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+  transition: color 0.2s ease;
+}
+
+.fullview-close:hover {
+  color: #6600ff;
+}
+
+.fullview-image {
+  max-width: 100%;
+  max-height: 80%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(102, 0, 255, 0.3);
+}
+
+.fullview-title {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-top: 20px;
   text-align: center;
-  color: #aaa;
-  font-size: 0.9rem;
-  margin: 2rem 0;
-  opacity: 0.6;
+  background: linear-gradient(45deg, #6600ff, #9933ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Position */
-.-shift-y {
-  transform: translateY(var(--shift-y, 0px));
-}
-
-.-shift-x {
-  transform: translateX(var(--shift-x, 0px));
-}
-
-.-shift-xy {
-  transform: translate(var(--shift-x, 0px), var(--shift-y, 0px));
-}
-
-.shift-y {
-  transform: translateY(var(--shift-y, 0px));
-}
-
-.shift-x {
-  transform: translateX(var(--shift-x, 0px));
-}
-
-.shift-xy {
-  transform: translate(var(--shift-x, 0px), var(--shift-y, 0px));
+/* Mobile fullview adjustments */
+@media (max-width: 768px) {
+  .fullview-close {
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+  }
+  
+  .fullview-title {
+    font-size: 1.2rem;
+    margin-top: 15px;
+  }
+  
+  .fullview-image {
+    max-height: 70%;
+  }
 }
