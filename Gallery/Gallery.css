@@ -8,7 +8,7 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #0a0a14;
- background: #0b0b13 url("../Image Folder/Backgrounds/Galaxy_Starshower.jpg") no-repeat center center fixed;  background-size: cover;
+  background: url("../Image Folder/Backgrounds/Galaxy_Starshower.jpg") no-repeat center center fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
