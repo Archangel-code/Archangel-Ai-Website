@@ -4,12 +4,14 @@ const perPage = 6;
 let currentFilter = "all";
 let currentPage = 1;
 let currentSort = "alphabetical";
+let currentSearch = "";
 
 // === Initialize on DOM Load ===
 document.addEventListener('DOMContentLoaded', function() {
     setupCardEvents();
     setupFilterButtons();
     setupSortButtons();
+    setupSearchFunctionality();
     filterAndDisplayCards();
     
     // Set initial scroll position
@@ -96,11 +98,71 @@ function setupSortButtons() {
     });
 }
 
+// === Search Functionality ===
+function setupSearchFunctionality() {
+    const searchInput = document.getElementById('search-input');
+    const clearButton = document.getElementById('clear-search');
+    
+    // Search input event listener with debouncing
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            currentSearch = this.value.toLowerCase().trim();
+            currentPage = 1;
+            filterAndDisplayCards();
+        }, 300); // 300ms debounce
+    });
+    
+    // Clear search button
+    clearButton.addEventListener('click', function() {
+        searchInput.value = '';
+        currentSearch = '';
+        currentPage = 1;
+        filterAndDisplayCards();
+        searchInput.focus();
+    });
+    
+    // Enter key to focus search
+    document.addEventListener('keydown', function(e) {
+        if (e.key === '/' && !document.querySelector('.card-expand.active') && document.activeElement !== searchInput) {
+            e.preventDefault();
+            searchInput.focus();
+        }
+    });
+}
+
 // === Filtering and Sorting ===
 function filterAndDisplayCards() {
     const cards = Array.from(document.querySelectorAll('.lora-card'));
     const filteredCards = cards.filter(card => {
-        return currentFilter === 'all' || card.dataset.category === currentFilter;
+        // Category filter
+        const categoryMatch = currentFilter === 'all' || card.dataset.category === currentFilter;
+        
+        // Search filter
+        let searchMatch = true;
+        if (currentSearch) {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const description = card.querySelector('p').textContent.toLowerCase();
+            const tags = card.dataset.tags ? card.dataset.tags.toLowerCase() : '';
+            
+            // Get description from the expanded modal if the card description is empty
+            const expandedCard = card.nextElementSibling;
+            let expandedDescription = '';
+            if (expandedCard && expandedCard.classList.contains('card-expand')) {
+                const infoText = expandedCard.querySelector('.info-text p');
+                if (infoText) {
+                    expandedDescription = infoText.textContent.toLowerCase();
+                }
+            }
+            
+            searchMatch = title.includes(currentSearch) || 
+                         description.includes(currentSearch) || 
+                         expandedDescription.includes(currentSearch) ||
+                         tags.includes(currentSearch);
+        }
+        
+        return categoryMatch && searchMatch;
     });
 
     // Sort cards
@@ -120,6 +182,7 @@ function filterAndDisplayCards() {
     // Display cards and update pagination
     displayCards(filteredCards);
     updatePagination(filteredCards.length);
+    updateSearchResultsInfo(filteredCards.length, cards.length);
 }
 
 // === Display Cards ===
@@ -174,6 +237,33 @@ function updatePagination(totalCards) {
             filterAndDisplayCards();
         });
     });
+}
+
+// === Search Results Info ===
+function updateSearchResultsInfo(filteredCount, totalCount) {
+    const searchResultsInfo = document.getElementById('search-results-info');
+    
+    if (currentSearch) {
+        if (filteredCount === 0) {
+            searchResultsInfo.textContent = `No results found for "${currentSearch}"`;
+        } else if (filteredCount === 1) {
+            searchResultsInfo.textContent = `1 result found for "${currentSearch}"`;
+        } else {
+            searchResultsInfo.textContent = `${filteredCount} results found for "${currentSearch}"`;
+        }
+        searchResultsInfo.style.display = 'block';
+    } else if (currentFilter !== 'all') {
+        if (filteredCount === 0) {
+            searchResultsInfo.textContent = `No ${currentFilter} models found`;
+        } else if (filteredCount === 1) {
+            searchResultsInfo.textContent = `1 ${currentFilter} model`;
+        } else {
+            searchResultsInfo.textContent = `${filteredCount} ${currentFilter} models`;
+        }
+        searchResultsInfo.style.display = 'block';
+    } else {
+        searchResultsInfo.style.display = 'none';
+    }
 }
 
 // === End of Script ===

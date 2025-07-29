@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>LoRa´s and Models</title>
-<link href="LoRa-Model.css" rel="stylesheet"/>
+<link href="LoRa-Model.css?v=3" rel="stylesheet"/>
 <script defer="" src="unified.js"></script>
 </head>
 
@@ -37,15 +37,23 @@
 <button data-filter="checkpoint">Checkpoints</button>
 </div>
 
-<div class="sort-menu center-x shift-xy" style="--shift-y: 80px; --shift-x: -490px;">
+<div class="controls-container shift-xy" style="--shift-x: -250px; --shift-y: 125px;">
+<div class="sort-menu">
 <button class="sort-btn active" data-sort="alphabetical">A–Z</button>
 <button class="sort-btn" data-sort="newest">Newest</button>
 </div>
+<div class="search-container">
+<input type="text" id="search-input" placeholder="Search..." class="search-input">
+<button id="clear-search" class="clear-search" title="Clear search">×</button>
+</div>
+</div>
+
+<div id="search-results-info" class="search-results-info shift-y" style="--shift-y: 135px;"></div>
 
         <!-- Content Grid -->
         <div class="gallery-container center-x shift-y" style="--shift-y: 135px;">
             <!-- Card 1: Cortana -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-06-15">
+            <div class="lora-card" data-category="character" data-timestamp="2025-06-15" data-tags="cortana,halo,ai,blue,hologram,microsoft,video game">
                 <img src="images/lora preview/lora_cortana.png" alt="Cortana LoRa">
                 <h3>Cortana (Halo 4)</h3>
                 <p></p>
@@ -76,7 +84,7 @@
             </div>
 
             <!-- Card 2: Ahsoka Tano -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-06-10">
+            <div class="lora-card" data-category="character" data-timestamp="2025-06-10" data-tags="ahsoka,star wars,jedi,togruta,clone wars,padawan">
                 <img src="images/lora preview/lora_ahsoka.png" alt="Ahsoka Tano LoRa">
                 <h3>Ahsoka Tano (Star Wars: The Clone Wars)</h3>
                 <p></p>
@@ -107,7 +115,7 @@
             </div>
 
             <!-- Card 3: Aayla Secura -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-24">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-24" data-tags="aayla,secura,star wars,jedi,twi'lek,clone wars,blue skin">
                 <img src="images/lora preview/lora_aayla.png" alt="Aayla Secura LoRa">
                 <h3>Aayla Secura (Star Wars: The Clone Wars)</h3>
                 <p></p>
@@ -138,7 +146,7 @@
             </div>
 
             <!-- Card 4: Aurore Cassel -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-22">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-22" data-tags="aurore,cassel,cyberpunk,2077,phantom liberty,sci-fi,futuristic">
                 <img src="images/lora preview/lora_aurore.jpg" alt="Aurore Cassel LoRa">
                 <h3>Aurore Cassel (Cyberpunk 2077: Phantom Liberty)</h3>
                 <p></p>
@@ -169,7 +177,7 @@
             </div>
 
             <!-- Card 5: Barriss Offee -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-08">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-08" data-tags="barriss,offee,star wars,jedi,mirialan,clone wars,tales of the sith">
                 <img src="images/lora preview/lora_barriss.jpg" alt="Barriss Offee LoRa">
                 <h3>Barriss Offee (Star Wars: The Clone Wars / Tales of the Sith)</h3>
                 <p></p>
@@ -200,7 +208,7 @@
             </div>
 
             <!-- Card 6: Caspian Keyes -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-08">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-08" data-tags="caspian,keyes,pantheon,amc,digital,consciousness,virtual,reality,animated">
                 <img src="images/lora preview/lora_caspian.png" alt="Caspian Keyes LoRa">
                 <h3>Caspian Keyes [AMC's Pantheon]</h3>
                 <p></p>
@@ -231,7 +239,7 @@
             </div>
 
             <!-- Card 7: Elizabeth Comstock -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-06-01">
+            <div class="lora-card" data-category="character" data-timestamp="2025-06-01" data-tags="elizabeth,comstock,bioshock,infinite,victorian,steampunk,reality bending">
                 <img src="images/lora preview/lora_elizabeth.png" alt="Elizabeth Comstock LoRa">
                 <h3>Elizabeth Comstock (BioShock Infinite)</h3>
                 <p></p>
@@ -262,7 +270,7 @@
             </div>
 
             <!-- Card 8: Serana Volkihar -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-28">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-28" data-tags="serana,volkihar,skyrim,elder scrolls,vampire,dawnguard,gothic,pale">
                 <img src="images/lora preview/lora_serana.jpg" alt="Serana Volkihar LoRa">
                 <h3>Serana Volkihar (The Elder Scrolls V: Skyrim)</h3>
                 <p></p>
@@ -293,7 +301,7 @@
             </div>
 
             <!-- Card 9: Maddie Kim -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-25">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-25" data-tags="maddie,kim,pantheon,amc,digital,consciousness,family,emotional,animated">
                 <img src="images/lora preview/lora_maddie.jpeg" alt="Maddie Kim LoRa">
                 <h3>Maddie Kim [AMC's Pantheon]</h3>
                 <p></p>
@@ -324,7 +332,7 @@
             </div>
 
             <!-- Card 10: Song So Mi -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-23">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-23" data-tags="song,so mi,songbird,cyberpunk,2077,phantom liberty,netrunner,mysterious">
                 <img src="images/lora preview/lora_song.png" alt="Song So Mi LoRa">
                 <h3>Song So Mi aka. Songbird (Cyberpunk 2077: Phantom Liberty)</h3>
                 <p></p>
@@ -355,7 +363,7 @@
             </div>
 
             <!-- Card 11: Hanako Arasaka -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-22">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-22" data-tags="hanako,arasaka,cyberpunk,2077,japanese,corporate,executive,influential">
                 <img src="images/lora preview/lora_arasaka.png" alt="Hanako Arasaka LoRa">
                 <h3>Hanako Arasaka (Cyberpunk 2077)</h3>
                 <p></p>
@@ -386,7 +394,7 @@
             </div>
 
             <!-- Card 12: Exoskeleton -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-22">
+            <div class="lora-card" data-category="clothing" data-timestamp="2025-05-22" data-tags="exoskeleton,cod,call of duty,armor,military,futuristic,warfare">
                 <img src="images/lora preview/lora_exo.png" alt="Exoskeleton LoRa">
                 <h3>Exoskeleton (COD Series)</h3>
                 <p></p>
@@ -417,7 +425,7 @@
             </div>
 
             <!-- Card 13: The Weapon -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-22">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-22" data-tags="weapon,halo,infinite,ai,hologram,blue,cortana successor">
                 <img src="images/lora preview/lora_weapon.png" alt="The Weapon LoRa">
                 <h3>The Weapon (Halo Infinite)</h3>
                 <p></p>
@@ -448,7 +456,7 @@
             </div>
 
             <!-- Card 14: Padmé Amidala -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-11">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-11" data-tags="padme,amidala,star wars,clone wars,senator,naboo,elegant,political">
                 <img src="images/lora preview/lora_padmé.png" alt="Padmé Amidala LoRa">
                 <h3>Padmé Amidala (Star Wars: The Clone Wars)</h3>
                 <p></p>
@@ -475,7 +483,7 @@
             </div>
 
             <!-- Card 15: Shaak Ti -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-11">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-11" data-tags="shaak,ti,star wars,clone wars,jedi,togruta,blue,white,force">
                 <img src="images/lora preview/lora_shaak.png" alt="Shaak Ti LoRa">
                 <h3>Shaak Ti (Star Wars: The Clone Wars)</h3>
                 <p></p>
@@ -506,7 +514,7 @@
             </div>
 
             <!-- Card 16: Luminara Unduli -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-08">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-08" data-tags="luminara,unduli,star wars,clone wars,jedi,mirialan,green,tattoos,wise">
                 <img src="images/lora preview/lora_luminara.jpg" alt="Luminara Unduli LoRa">
                 <h3>Luminara Unduli (Star Wars: The Clone Wars)</h3>
                 <p></p>
@@ -537,7 +545,7 @@
             </div>
 
             <!-- Card 17: Riyo Chuchi -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-05-07">
+            <div class="lora-card" data-category="character" data-timestamp="2025-05-07" data-tags="riyo,chuchi,star wars,clone wars,bad batch,pantoran,senator,blue,political">
                 <img src="images/lora preview/lora_riyo.png" alt="Riyo Chuchi LoRa">
                 <h3>Riyo Chuchi (Star Wars: The Clone Wars / The Bad Batch)</h3>
                 <p></p>
@@ -568,7 +576,7 @@
             </div>
 
             <!-- Card 18: Invisible Woman -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-17">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-17" data-tags="invisible woman,susan storm,fantastic four,marvel rivals,invisibility,force fields,blue uniform">
                 <img src="images/lora preview/lora_invisible_woman.png" alt="Invisible Woman LoRa">
                 <h3>Invisible Woman aka. Susan Storm [2 Versions] (Marvel Rivals)</h3>
                 <p></p>
@@ -599,7 +607,7 @@
             </div>
 
             <!-- Card 19: Scarlet Witch -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-16">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-16" data-tags="scarlet witch,wanda maximoff,marvel rivals,chaos magic,reality,red costume,mystical">
                 <img src="images/lora preview/lora_scarlet_witch.png" alt="Scarlet Witch LoRa">
                 <h3>Scarlet Witch aka. Wanda Maximoff (Marvel Rivals)</h3>
                 <p></p>
@@ -630,7 +638,7 @@
             </div>
 
             <!-- Card 20: Luna Snow -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-16">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-16" data-tags="luna snow,seol hee,marvel rivals,kpop,ice powers,korean,performance,crystalline">
                 <img src="images/lora preview/lora_luna_snow.png" alt="Luna Snow LoRa">
                 <h3>Luna Snow aka. Seol Hee (Marvel Rivals)</h3>
                 <p></p>
@@ -661,7 +669,7 @@
             </div>
 
             <!-- Card 21: Laurie Stevens -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-16">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-16" data-tags="laurie,stevens,pantheon,amc,digital,consciousness,animated,virtual">
                 <img src="images/lora preview/lora_laurie.png" alt="Laurie Stevens LoRa">
                 <h3>Laurie Stevens [AMC's Pantheon]</h3>
                 <p></p>
@@ -692,7 +700,7 @@
             </div>
 
             <!-- Card 22: Ellen DeGenerate -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-15">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-15" data-tags="ellen,degenerate,pantheon,amc,digital,consciousness,animated,virtual">
                 <img src="images/lora preview/lora_ellen.png" alt="Ellen DeGenerate LoRa">
                 <h3>Ellen DeGenerate [AMC's Pantheon]</h3>
                 <p></p>
@@ -723,7 +731,7 @@
             </div>
 
             <!-- Card 23: Stephen Kim -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-14">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-14" data-tags="stephen,kim,pantheon,amc,digital,immortality,consciousness,animated">
                 <img src="images/lora preview/lora_stephen.png" alt="Stephen Kim LoRa">
                 <h3>Stephen Kim [AMC's Pantheon]</h3>
                 <p></p>
@@ -754,7 +762,7 @@
             </div>
 
             <!-- Card 24: Rachel Ellis -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-13">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-13" data-tags="rachel,ellis,pantheon,amc,digital,consciousness,virtual,reality,animated">
                 <img src="images/lora preview/lora_rachel.png" alt="Rachel Ellis LoRa">
                 <h3>Rachel Ellis [AMC's Pantheon]</h3>
                 <p></p>
@@ -785,7 +793,7 @@
             </div>
 
             <!-- Card 25: Peter Sarsgaard -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-11">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-11" data-tags="peter,sarsgaard,pantheon,amc,digital,consciousness,virtual,existence,animated">
                 <img src="images/lora preview/lora_peter.png" alt="Peter Sarsgaard LoRa">
                 <h3>Peter Sarsgaard [AMC's Pantheon]</h3>
                 <p></p>
@@ -816,7 +824,7 @@
             </div>
 
             <!-- Card 26: David Jr. Kim -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-10">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-10" data-tags="david,jr,kim,pantheon,amc,digital,consciousness,animated,virtual">
                 <img src="images/lora preview/lora_david_jr.png" alt="David Jr. Kim LoRa">
                 <h3>David Jr. Kim [AMC's Pantheon]</h3>
                 <p></p>
@@ -847,7 +855,7 @@
             </div>
 
             <!-- Card 27: David Kim -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-09">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-09" data-tags="david,kim,pantheon,amc,digital,consciousness,animated,virtual,father">
                 <img src="images/lora preview/lora_david.png" alt="David Kim LoRa">
                 <h3>David Kim [AMC's Pantheon]</h3>
                 <p></p>
@@ -878,9 +886,9 @@
             </div>
 
             <!-- Card 28: Mist -->
-            <div class="lora-card" data-category="character" data-timestamp="2025-04-08">
+            <div class="lora-card" data-category="character" data-timestamp="2025-04-08" data-tags="mist,pantheon,amc,digital,consciousness,animated,virtual,artificial intelligence, AI">
                 <img src="images/lora preview/lora_mist.jpeg" alt="Mist LoRa">
-                <h3>Mist (The Mist Movie)</h3>
+                <h3>MIST [AMC's Pantheon]</h3>
                 <p></p>
             </div>
             <div class="card-expand">
@@ -889,9 +897,9 @@
                         <button class="close-btn">×</button>
                         <img class="expand-img" src="images/lora preview/lora_mist.jpeg" alt="Mist LoRA Large">
                         <div class="expand-details">
-                            <h2>Mist (The Mist Movie)</h2>
+                            <h2>MIST [AMC's Pantheon]</h2>
                             <div class="info-text">
-                                <p>The mysterious and terrifying supernatural mist from Stephen King's horror story. This model captures the eerie atmosphere and otherworldly creatures that emerge from the deadly fog.</p>
+                                <p>A character from AMC's Pantheon animated series, part of the complex narrative exploring digital consciousness and artificial intelligence. This model captures her distinctive appearance and role in the thought-provoking series about uploaded minds and virtual existence.</p>
                             </div>
                             <div class="buttons">
                                 <a href="https://civitai.com/models/1406461/mist-the-mist-movie" target="_blank" class="icon-tooltip">
