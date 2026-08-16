@@ -4,18 +4,35 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>LoRa´s and Models</title>
+<meta name="description" content="Explore Archangel AI character LoRAs, models and creative resources."/>
+<meta name="theme-color" content="#070b1d"/>
+<link rel="canonical" href="https://archangel-ai.art/LoRas-Models/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Archangel AI"/>
+<meta property="og:title" content="LoRAs &amp; Models — Archangel AI"/>
+<meta property="og:description" content="Explore Archangel AI character LoRAs, models and creative resources."/>
+<meta property="og:url" content="https://archangel-ai.art/LoRas-Models/"/>
+<meta property="og:image" content="https://archangel-ai.art/Image%20Folder/Social/archangel-ai-social-card.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="LoRAs &amp; Models — Archangel AI"/>
+<meta name="twitter:description" content="Explore Archangel AI character LoRAs, models and creative resources."/>
+<meta name="twitter:image" content="https://archangel-ai.art/Image%20Folder/Social/archangel-ai-social-card.png"/>
+<title>LoRAs &amp; Models — Archangel AI</title>
 <link href="LoRa-Model.css?v=3" rel="stylesheet"/>
+<link href="../live-background.css" rel="stylesheet"/>
+<link href="../site-shell.css" rel="stylesheet"/>
+<script defer src="../live-background.js"></script>
+<script defer src="../site-shell.js"></script>
 <script defer="" src="unified.js"></script>
 </head>
 
-<body>
+<body class="lora-page" data-page="loras">
 <div class="overlay"></div>
 <div class="layout-container">
 <div class="pagination"></div>
 <header class="shift-y" style="--shift-y: 0px;">
-<h1 class="title center-x">LoRa´s and Models Gallery</h1>
-<p class="subtitle center-x">Explore my Characters Creations and various others</p>
+<h1 class="title center-x">LoRAs &amp; Models Gallery</h1>
+<p class="subtitle center-x">Explore my character creations and other models</p>
 
 <div class="icon-links center-x shift-y" style="--shift-y: 50px;">
 <a class="icon-tooltip" href="https://civitai.com/user/Archangel_Ai" target="_blank">
@@ -43,12 +60,12 @@
 <button class="sort-btn" data-sort="newest">Newest</button>
 </div>
 <div class="search-container">
-<input type="text" id="search-input" placeholder="Search..." class="search-input">
-<button id="clear-search" class="clear-search" title="Clear search">×</button>
+<input type="search" id="search-input" placeholder="Search models..." class="search-input" aria-label="Search models">
+<button type="button" id="clear-search" class="clear-search" title="Clear search" aria-label="Clear search">×</button>
 </div>
 </div>
 
-<div id="search-results-info" class="search-results-info shift-y" style="--shift-y: 135px;"></div>
+<div id="search-results-info" class="search-results-info shift-y" style="--shift-y: 135px;" aria-live="polite"></div>
 
         <!-- Content Grid -->
         <div class="gallery-container center-x shift-y" style="--shift-y: 135px;">
@@ -919,14 +936,14 @@
 
 </main>
 
-<div class="pagination-wrapper shift-y" id="pagination-slot" style="--shift-y: 80px;"></div>
+<div class="pagination-wrapper" id="pagination-slot"></div>
 
 <div class="back-button-wrapper center-x">
-<a class="back-button shift-y" href="../" style="--shift-y: 18px;">← Return to Homepage</a>
+<a class="back-button" href="../">← Return to Homepage</a>
 </div>
 
-<footer class="footer shift-y" style="--shift-y: 18px;">
-<p>© 2025 Archangel-AI.art — All rights reserved.</p>
+<footer class="footer">
+<p>© 2026 Archangel-AI.art — All rights reserved.</p>
 </footer>
 
 </div>

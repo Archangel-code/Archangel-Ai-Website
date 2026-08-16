@@ -3,21 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Browse Archangel AI artwork by character and universe." />
+  <meta name="theme-color" content="#070b1d" />
+  <link rel="canonical" href="https://archangel-ai.art/Gallery/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Archangel AI" />
+  <meta property="og:title" content="Gallery — Archangel AI" />
+  <meta property="og:description" content="Browse Archangel AI artwork by character and universe." />
+  <meta property="og:url" content="https://archangel-ai.art/Gallery/" />
+  <meta property="og:image" content="https://archangel-ai.art/Image%20Folder/Social/archangel-ai-social-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gallery — Archangel AI" />
+  <meta name="twitter:description" content="Browse Archangel AI artwork by character and universe." />
+  <meta name="twitter:image" content="https://archangel-ai.art/Image%20Folder/Social/archangel-ai-social-card.png" />
   <title>Gallery – Archangel AI</title>
   <link rel="stylesheet" href="Gallery.css">
+  <link rel="stylesheet" href="../live-background.css">
+  <link rel="stylesheet" href="../site-shell.css">
+  <script defer src="../live-background.js"></script>
+  <script defer src="../site-shell.js"></script>
 </head>
-<body>
+<body class="gallery-page" data-page="gallery">
   <h1 class="title">Gallery</h1>
 
   <div class="controls">
     <div class="filter-buttons">
-      <button id="sortAZ" class="filter-btn active">A-Z</button>
-      <button id="sortNewest" class="filter-btn">Newest</button>
+      <button type="button" id="sortAZ" class="filter-btn active" aria-pressed="true">A-Z</button>
+      <button type="button" id="sortNewest" class="filter-btn" aria-pressed="false">Newest</button>
     </div>
-    <input type="text" id="searchInput" placeholder="Search...">
+    <input type="search" id="searchInput" placeholder="Search artwork..." aria-label="Search artwork">
   </div>
 
-  <div id="galleryGrid" class="grid"></div>
+  <div id="galleryGrid" class="grid" aria-live="polite"></div>
 
   <div class="pagination">
     <button id="prevPage">Prev</button>
@@ -32,7 +49,7 @@
   </div>
 
   <footer class="footer shift-xy" style="--shift-y: 6px;">
-    <p>© 2025 Archangel-AI.art — All rights reserved.</p>
+    <p>© 2026 Archangel-AI.art — All rights reserved.</p>
   </footer>
 </body>
 </html>
