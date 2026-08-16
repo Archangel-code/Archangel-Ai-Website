@@ -75,9 +75,14 @@ function setupCardEvents() {
 function setupFilterButtons() {
     const filterButtons = document.querySelectorAll('.filter-menu button');
     filterButtons.forEach(button => {
+        button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
         button.addEventListener('click', () => {
-            filterButtons.forEach(btn => btn.classList.remove('active'));
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
+            });
             button.classList.add('active');
+            button.setAttribute('aria-pressed', 'true');
             currentFilter = button.dataset.filter;
             currentPage = 1;
             filterAndDisplayCards();
@@ -89,9 +94,14 @@ function setupFilterButtons() {
 function setupSortButtons() {
     const sortButtons = document.querySelectorAll('.sort-menu .sort-btn');
     sortButtons.forEach(button => {
+        button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
         button.addEventListener('click', () => {
-            sortButtons.forEach(btn => btn.classList.remove('active'));
+            sortButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
+            });
             button.classList.add('active');
+            button.setAttribute('aria-pressed', 'true');
             currentSort = button.dataset.sort;
             filterAndDisplayCards();
         });

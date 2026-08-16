@@ -4,6 +4,7 @@ let currentPage = 1;
 let currentSort = "az"; // "az" or "newest"
 let currentSearch = "";
 let galleryData = []; // Will be populated with gallery items
+let lastFocusedElement = null;
 
 // === Initialize on DOM Load ===
 document.addEventListener('DOMContentLoaded', function() {
@@ -14,7 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // === Load Gallery Data ===
 function loadGalleryData() {
     fetch('gallery.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error(`Gallery request failed: ${response.status}`);
+            return response.json();
+        })
         .then(data => {
             // Transform data to match expected format
             galleryData = data.map((item, index) => ({
@@ -77,8 +81,11 @@ function setupControls() {
 function updateActiveButton(activeId) {
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
     });
-    document.getElementById(activeId).classList.add('active');
+    const activeButton = document.getElementById(activeId);
+    activeButton.classList.add('active');
+    activeButton.setAttribute('aria-pressed', 'true');
 }
 
 // === Filter and Display Gallery ===
@@ -120,8 +127,11 @@ function displayItems(items) {
     pageItems.forEach(item => {
         const itemElement = document.createElement('div');
         itemElement.className = 'gallery-item';
+        itemElement.tabIndex = 0;
+        itemElement.setAttribute('role', 'button');
+        itemElement.setAttribute('aria-label', `Open ${item.title} preview`);
         itemElement.innerHTML = `
-            <img src="${item.image}" alt="${item.title}" loading="lazy" onclick="openFullView('${item.image}', '${item.title}')">
+            <img src="${item.image}" alt="${item.title}" loading="lazy">
             <div class="item-info">
                 <h3>${item.title}</h3>
                 <div class="tags">
@@ -129,6 +139,12 @@ function displayItems(items) {
                 </div>
             </div>
         `;
+        itemElement.addEventListener('click', () => openFullView(item.image, item.title));
+        itemElement.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            openFullView(item.image, item.title);
+        });
         grid.appendChild(itemElement);
     });
 }
@@ -179,7 +195,7 @@ function updatePagination(totalItems) {
 
     // Main page numbers
     for (let i = startPage; i <= endPage; i++) {
-        html += `<button onclick="goToPage(${i})" ${currentPage === i ? 'class="active"' : ''}>${i}</button>`;
+        html += `<button type="button" onclick="goToPage(${i})" ${currentPage === i ? 'class="active" aria-current="page"' : ''}>${i}</button>`;
     }
 
     // Last page and ellipsis if needed
@@ -244,14 +260,18 @@ function openFullView(imageSrc, imageTitle) {
         modal = document.createElement('div');
         modal.id = 'fullviewModal';
         modal.className = 'fullview-modal';
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+        modal.setAttribute('aria-labelledby', 'fullviewTitle');
         modal.innerHTML = `
             <div class="fullview-content">
-                <span class="fullview-close" onclick="closeFullView()">&times;</span>
+                <button type="button" class="fullview-close" aria-label="Close preview">&times;</button>
                 <img id="fullviewImage" class="fullview-image" src="" alt="">
-                <div class="fullview-title"></div>
+                <div class="fullview-title" id="fullviewTitle"></div>
             </div>
         `;
         document.body.appendChild(modal);
+        modal.querySelector('.fullview-close').addEventListener('click', closeFullView);
         
         // Add click outside to close
         modal.addEventListener('click', function(e) {
@@ -268,6 +288,8 @@ function openFullView(imageSrc, imageTitle) {
         });
     }
     
+    lastFocusedElement = document.activeElement;
+
     // Set image and title
     document.getElementById('fullviewImage').src = imageSrc;
     document.getElementById('fullviewImage').alt = imageTitle;
@@ -276,12 +298,14 @@ function openFullView(imageSrc, imageTitle) {
     // Show modal
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    modal.querySelector('.fullview-close').focus();
 }
 
 function closeFullView() {
     const modal = document.getElementById('fullviewModal');
     if (modal) {
         modal.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Restore scrolling
+        document.body.style.overflow = ''; // Restore page behavior
+        lastFocusedElement?.focus();
     }
 }

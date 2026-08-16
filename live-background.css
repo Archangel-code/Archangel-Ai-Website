@@ -1,0 +1,106 @@
+:root {
+  --live-bg-pointer-x: 0px;
+  --live-bg-pointer-y: 0px;
+}
+
+html {
+  background: #040611;
+}
+
+body {
+  background: transparent !important;
+  isolation: isolate;
+}
+
+.live-background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  background: #040611;
+}
+
+.live-background__drift {
+  position: absolute;
+  inset: -8vmax;
+  animation: live-background-drift 34s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.live-background__image {
+  position: absolute;
+  inset: -3vmax;
+  background-image: url("Image Folder/Backgrounds/Galaxy_Starshower.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: saturate(1.06) contrast(1.03);
+  transform: translate3d(
+      var(--live-bg-pointer-x),
+      var(--live-bg-pointer-y),
+      0
+    ) scale(1.07);
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.live-background__stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.72;
+  mix-blend-mode: screen;
+}
+
+.live-background__glow {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 38% 42%, rgba(113, 142, 255, 0.13), transparent 32%),
+    radial-gradient(circle at 68% 62%, rgba(167, 92, 255, 0.11), transparent 35%);
+  mix-blend-mode: screen;
+  opacity: 0.72;
+  animation: live-background-glow 18s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes live-background-drift {
+  0% {
+    transform: translate3d(-1.4%, -1%, 0) scale(1.04);
+  }
+  48% {
+    transform: translate3d(0.4%, 0.8%, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(1.5%, -0.35%, 0) scale(1.045);
+  }
+}
+
+@keyframes live-background-glow {
+  0% {
+    opacity: 0.5;
+    transform: translate3d(-1.5%, 0, 0) scale(1);
+  }
+  100% {
+    opacity: 0.82;
+    transform: translate3d(1.5%, -1%, 0) scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-background__drift,
+  .live-background__glow {
+    animation: none;
+  }
+
+  .live-background__image {
+    transform: scale(1.07);
+    transition: none;
+  }
+
+  .live-background__stars {
+    display: none;
+  }
+}

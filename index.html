@@ -3,23 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Archangel_Ai</title>
+  <meta name="description" content="Archangel AI — original art, character models, stories and worlds beyond reality." />
+  <meta name="theme-color" content="#070b1d" />
+  <link rel="canonical" href="https://archangel-ai.art/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Archangel AI" />
+  <meta property="og:title" content="Archangel AI — Art, Stories &amp; Worlds beyond Reality" />
+  <meta property="og:description" content="Original art, character models, stories and worlds beyond reality." />
+  <meta property="og:url" content="https://archangel-ai.art/" />
+  <meta property="og:image" content="https://archangel-ai.art/Image%20Folder/Social/archangel-ai-social-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Archangel AI — Art, Stories &amp; Worlds beyond Reality" />
+  <meta name="twitter:description" content="Original art, character models, stories and worlds beyond reality." />
+  <meta name="twitter:image" content="https://archangel-ai.art/Image%20Folder/Social/archangel-ai-social-card.png" />
+  <title>Archangel AI — Art, Stories & Worlds beyond Reality</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="live-background.css" />
+  <link rel="stylesheet" href="site-shell.css" />
+  <script defer src="live-background.js"></script>
+  <script defer src="site-shell.js"></script>
   <style>
     .shift {
       transform: translateY(var(--shift-y, 0px));
     }
   </style>
 </head>
-<body>
+<body class="home-page" data-page="home">
   <div class="overlay"></div>
 
   <div class="layout-container">
-  <nav class="nav-links">
+  <nav class="nav-links" aria-label="Primary navigation">
     <a href="Gallery/">Gallery</a>
-    <a href="LoRas-Models/">LoRa´s and Models</a>
+    <a href="LoRas-Models/">LoRAs &amp; Models</a>
     <a href="Projects/">Projects</a>
-    <a href="Donate/">Donation</a>
+    <a href="Donate/">Support</a>
   </nav>
 
     <section class="hero shift-y" style="--shift-y: 50px;">
@@ -42,7 +59,7 @@
     </div>
 
 <footer class="footer shift-y" style="--shift-y: 646px;">
-  <p>© 2025 Archangel-AI.art — All rights reserved.</p>
+  <p>© 2026 Archangel-AI.art — All rights reserved.</p>
 </footer>
   </div>
 
@@ -59,7 +76,11 @@
     }
   }
 
-  window.onload = typeEffect;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    target.textContent = text;
+  } else {
+    window.addEventListener("load", typeEffect, { once: true });
+  }
 </script>
 </body>
 </html>
