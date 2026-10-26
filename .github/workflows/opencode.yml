@@ -1,0 +1,46 @@
+name: opencode
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+
+# One run per thread: a second /oc comment while a run is active queues instead
+# of racing the first one on the same branch.
+concurrency:
+  group: opencode-${{ github.event.issue.number || github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  opencode:
+    # Two conditions:
+    #   1. the comment contains a trigger phrase
+    #   2. only the owner, members and collaborators may trigger it
+    # The second one matters because this repo is public: without it anybody
+    # could spend the API credits behind MELIOUS_API_KEY.
+    if: |
+      (contains(github.event.comment.body, '/oc') || contains(github.event.comment.body, '/opencode')) &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      id-token: write # exchanged for an opencode-agent App token via OIDC
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Run opencode
+        uses: anomalyco/opencode/github@v2.1.4
+        env:
+          MELIOUS_API_KEY: ${{ secrets.MELIOUS_API_KEY }}
+        with:
+          model: melious/deepseek-v4.1-flash
+          # uses_github_token stays false: the App token comes from OIDC above.
+          # If the opencode-agent App is not installed on this repo, set this to
+          # true and add `issues: write` + `pull-requests: write` to permissions.
+          use_github_token: false
